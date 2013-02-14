@@ -4,17 +4,32 @@
  * Lorenzo Martinez, Conner Lambden, Chris Sotorros 
  * 2/14/13
  */
+
 import java.awt.*;
 import objectdraw.*;
+
 public class CheckersInterface extends FrameWindowController implements FakeButtonListener 
 {
+    //the button that ends the turn of the current player
     private FakeButton endTurn;
+    
+    //the frame that holds the player text
     private FramedRect player1Frame,player2Frame;
+    
+    //the filled rect that is used to simulate "highlighting" the current players turn
     private FilledRect player1Highlight,player2Highlight;
+    
+    //the text that displays each player's turn
     private Text player1Text,player2Text;
+    
+    //the toggle that controls which box is highlighted. true = player1. false = player2
     private boolean playerTurn;
+    
+    //a temporary checkerboard to test whether or not the interface and board can exist on the same canvas. 
+    //it will be replaced later by the checkerboard that another group creates
     private CheckerBoard board;
-    //private Color highlightTurn;
+    
+    //creates the interface and passes in the canvas to the checkerboard 
     public void createInterface()
     {   
         board = new CheckerBoard();
@@ -35,6 +50,8 @@ public class CheckersInterface extends FrameWindowController implements FakeButt
         endTurn = new FakeButton(250,200,100,50,"End Turn",1,this,canvas);
 
     }
+    
+    //if one is passed in, highlights player1's square. if any other number is passed in, highlights player2's square
     public void highlight(int playerNumber)
     {
         if(playerNumber == 1)
@@ -48,6 +65,8 @@ public class CheckersInterface extends FrameWindowController implements FakeButt
             player1Highlight.hide();
         }
     }
+    
+    //if the end turn button is pressed, the highlight is flipped using a toggle named playerTurn
     public void buttonAction(int identity)
     {
         if(identity == 1)
@@ -62,7 +81,8 @@ public class CheckersInterface extends FrameWindowController implements FakeButt
                 highlight(1);
                 playerTurn = false;
             }
-            //placeholder for the method that gets called when the turn is ended
+            //placeholder for the method that gets called when the turn is ended. 
+            //when this method is available, it will be added in
         }
     }
 }
